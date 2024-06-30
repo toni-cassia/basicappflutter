@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,13 +21,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   @override
@@ -40,7 +41,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     _tabController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
     );
   }
+
   Widget _buildDrawer() {
     return Drawer(
       child: ListView(
@@ -106,24 +107,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
             ),
           ),
-          _buildDrawerItem(Icons.home, 'Home'),
-          _buildDrawerItem(Icons.person, 'Profile'),
-          _buildDrawerItem(Icons.settings, 'Settings'),
+          _buildDrawerItem(Icons.person, 'Sign In', 0),
+          _buildDrawerItem(Icons.person_add, 'Sign Up', 1),
+          _buildDrawerItem(Icons.calculate, 'Calculator', 2),
         ],
       ),
     );
   }
 
-  Widget _buildDrawerItem(IconData icon, String title) {
+  Widget _buildDrawerItem(IconData icon, String title, int index) {
     return ListTile(
       leading: Icon(icon, color: Theme.of(context).primaryColor),
       title: Text(title),
       onTap: () {
         Navigator.pop(context);
+        _tabController.animateTo(index);
       },
     );
   }
 }
+
 
 class SignInScreen extends StatelessWidget {
   @override
